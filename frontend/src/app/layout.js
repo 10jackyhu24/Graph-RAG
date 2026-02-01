@@ -2,7 +2,11 @@
 
 import "../styles/home.css";
 import Navbar from "../components/Navbar";
-import "../i18n"; // 確保 i18n 在應用啟動時初始化
+import "../i18n";
+import "@/styles/globals.css"
+import "@/styles/theme.css"
+import "@/styles/layout.css"
+import "@/styles/components.css"
 
 export default function RootLayout({ children }) {
   return (

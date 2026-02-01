@@ -1,6 +1,7 @@
 "use client"
 
 import { useTranslation } from "react-i18next"
+import Link from "next/link"
 
 export default function Navbar() {
     const { t, i18n } = useTranslation();
@@ -13,10 +14,10 @@ export default function Navbar() {
       <div className="logo">VISION IRG</div>
 
       <div className="nav-links">
-        <a>{t("home")}</a>
-        <a>{t("workspace")}</a>
-        <a>{t("meetingMode")}</a>
-        <a>{t("decisionDialog")}</a>
+        <Link href="/">{t("home")}</Link>
+        <Link href="/workspace">{t("workspace")}</Link>
+        <Link href="/meeting">{t("meetingMode")}</Link>
+        <Link href="/dialog">{t("decisionDialog")}</Link>
       </div>
 
       <div className="nav-actions">
