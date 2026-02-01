@@ -29,10 +29,10 @@
   border-radius: 10px;
   font-weight: 500;
   background: var(--primary);
-  color: white;
+  color: rgb(83, 83, 83);
 }
-
+/* 
 .button.secondary {
   background: var(--primary-soft);
   color: var(--primary);
-}
+} */

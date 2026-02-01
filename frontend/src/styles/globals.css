@@ -17,9 +17,11 @@ a {
 }
 
 button {
-  border: none;
+  padding: 8px 16px;
+  border: 3px solid #b5b5b5;
+  border-radius: 5px;
   cursor: pointer;
-  background: none;
+  background: #e3e3e3;
 }
 
 .title-bar {

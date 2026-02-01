@@ -1,14 +1,38 @@
 "use client"
 
+import { useState } from "react"
+
 export default function WorkspacePage() {
+  const [file, setFile] = useState(null)
+  const [title, setTitle] = useState("")
+  const [text, setText] = useState("")
+
+
+  const handleSubmit = async () => {
+    if (!file && !text) {
+      alert("請上傳檔案或貼上文字")
+      return
+    }
+
+    const formData = new FormData()
+    formData.append("title", title)
+    if (file) formData.append("file", file)
+    if (text) formData.append("text", text)
+
+    const res = await fetch("http://localhost:8000/api/upload", {
+      method: "POST",
+      body: formData,
+    })
+
+    const data = await res.json()
+    console.log(data)
+  }
+
   return (
     <main className="work-area">
       {/* 標題區 */}
       <section className="title-bar">
         <h1>生成可審閱的決策頁面</h1>
-        {/* <p className="desc">
-          上傳文件或貼上文字，轉成可保存、可下載的決策頁。
-        </p> */}
       </section>
 
       <section className="word-body">
@@ -20,10 +44,16 @@ export default function WorkspacePage() {
           <input placeholder="請輸入決策標題" />
 
           <label>上傳檔案</label>
-          <input type="file" />
+          <input
+            type="file"
+            accept=".pdf,.docx,.txt"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
 
           <label>或貼上文字</label>
           <textarea placeholder="貼上會議紀錄、文件內容…" />
+
+          <button onClick={handleSubmit}>開始處理</button>
         </aside>
 
         {/* 中間：決策頁預覽 */}
