@@ -1,32 +1,45 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
+import { BASE_URL } from "@/config";
+import DecisionDocument from "@/components/DecisionDocument";
+import "@/styles/decision-document.css";
 
 export default function WorkspacePage() {
-  const [file, setFile] = useState(null)
-  const [title, setTitle] = useState("")
-  const [text, setText] = useState("")
-
+  const [file, setFile] = useState(null);
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [documentData, setDocumentData] = useState(null);
 
   const handleSubmit = async () => {
     if (!file && !text) {
-      alert("請上傳檔案或貼上文字")
-      return
+      alert("請上傳檔案或貼上文字");
+      return;
     }
 
-    const formData = new FormData()
-    formData.append("title", title)
-    if (file) formData.append("file", file)
-    if (text) formData.append("text", text)
+    const formData = new FormData();
+    formData.append("title", title);
+    if (file) formData.append("file", file);
+    if (text) formData.append("text", text);
 
-    const res = await fetch("http://localhost:8000/api/process", {
-      method: "POST",
-      body: formData,
-    })
+    try {
+      const res = await fetch(`${BASE_URL}/api/process`, {
+        method: "POST",
+        body: formData,
+      });
 
-    const data = await res.json()
-    console.log(data)
-  }
+      if (!res.ok) {
+        throw new Error("Failed to process the request");
+      }
+
+      const data = await res.json();
+      console.log(data);
+      setDocumentData(data);
+    } catch (error) {
+      console.error("Error:", error);
+      alert("處理失敗，請稍後再試");
+    }
+  };
 
   return (
     <main className="work-area">
@@ -41,7 +54,11 @@ export default function WorkspacePage() {
           <h3>輸入來源</h3>
 
           <label>標題（選填）</label>
-          <input placeholder="請輸入決策標題" />
+          <input
+            placeholder="請輸入決策標題"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
 
           <label>上傳檔案</label>
           <input
@@ -51,7 +68,11 @@ export default function WorkspacePage() {
           />
 
           <label>或貼上文字</label>
-          <textarea placeholder="貼上會議紀錄、文件內容…" />
+          <textarea
+            placeholder="貼上會議紀錄、文件內容…"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
 
           <button onClick={handleSubmit}>開始處理</button>
         </aside>
@@ -62,17 +83,15 @@ export default function WorkspacePage() {
             <h3>決策頁預覽</h3>
 
             <div className="actions">
-              <button>下載 HTML</button>
-              <button>下載 PDF</button>
-              <button>全螢幕</button>
-              <button>刪除</button>
+              <button disabled={!documentData}>下載 HTML</button>
+              <button disabled={!documentData}>下載 PDF</button>
+              <button disabled={!documentData}>全螢幕</button>
+              <button disabled={!documentData}>刪除</button>
             </div>
           </div>
 
           <div className="preview-content">
-            <p className="placeholder">
-              模型產生時即時更新內容。
-            </p>
+            <DecisionDocument data={documentData} />
           </div>
         </section>
 
@@ -81,9 +100,15 @@ export default function WorkspacePage() {
           <h3>文件管理</h3>
 
           <ul>
-            <li>永豐 <button>預覽</button></li>
-            <li>量子 <button>預覽</button></li>
-            <li>Untitled <button>預覽</button></li>
+            <li>
+              永豐 <button>預覽</button>
+            </li>
+            <li>
+              量子 <button>預覽</button>
+            </li>
+            <li>
+              Untitled <button>預覽</button>
+            </li>
           </ul>
 
           <button className="danger">刪除選取文件</button>
@@ -91,5 +116,5 @@ export default function WorkspacePage() {
         </aside>
       </section>
     </main>
-  )
+  );
 }

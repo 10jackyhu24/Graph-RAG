@@ -1,0 +1,64 @@
+{
+    "type": "object",
+    "properties": {
+        "document_metadata": {
+            "type": "object",
+            "properties": {
+                "document_id": {"type": "string"},
+                "document_title": {"type": "string"},
+                "document_type": {"type": "string"},
+                "vendor": {"type": "string"},
+                "product_or_topic": {"type": "string"},
+                "version": {"type": "string"}
+            },
+            "required": ["document_id", "document_title"]
+        },
+        "contexts": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "context_id": {"type": "string", "pattern": "^CTX-[0-9]{3}$"},
+                    "decision_level": {"enum": ["L", "M", "S"]},
+                    "title": {
+                        "type": "object",
+                        "properties": {"zh": {"type": "string"}, "en": {"type": "string"}}
+                    },
+                    "context_intents": {"type": "array", "items": {"type": "string"}},
+                    "primary_roles": {"type": "array", "items": {"type": "string"}},
+                    "entities": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {"type": "string"},
+                                "type": {"type": "string"},
+                                "description": {"type": "object", "properties": {"zh": {"type": "string"}, "en": {"type": "string"}}}
+                            }
+                        }
+                    },
+                    "conditions": {"type": "object", "properties": {"zh": {"type": "array", "items": {"type": "string"}}, "en": {"type": "array", "items": {"type": "string"}}}},
+                    "observed_issues_or_risks": {"type": "object", "properties": {"zh": {"type": "array", "items": {"type": "string"}}, "en": {"type": "array", "items": {"type": "string"}}}},
+                    "outcomes_or_consequences": {"type": "object", "properties": {"zh": {"type": "array", "items": {"type": "string"}}, "en": {"type": "array", "items": {"type": "string"}}}},
+                    "decision_boundaries": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "boundary_type": {"type": "string"},
+                                "description": {"type": "object", "properties": {"zh": {"type": "string"}, "en": {"type": "string"}}},
+                                "affected_roles": {"type": "array", "items": {"type": "string"}}
+                            }
+                        }
+                    },
+                    "non_applicability_notes": {"type": "object", "properties": {"zh": {"type": "string"}, "en": {"type": "string"}}},
+                    "architecture_evolution_note": {"type": "object", "properties": {"zh": {"type": "string"}, "en": {"type": "string"}}},
+                    "confidence_score": {"type": "number", "minimum": 0, "maximum": 1},
+                    "source_reference": {"type": "object", "properties": {"section": {"type": "string"}, "page": {"type": "string"}}}
+                },
+                "required": ["context_id", "decision_level", "title", "primary_roles"]
+            }
+        }
+    },
+    "required": ["document_metadata", "contexts"]
+}
