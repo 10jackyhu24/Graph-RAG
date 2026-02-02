@@ -1,25 +1,31 @@
 import ollama
+import os
 
-def summarize(text: str) -> str:
-    prompt = f"""
-你是一個專業的會議與文件摘要助手。
-請將以下內容整理成「重點摘要」。
+async def summarize(text: str) -> str:
+    print(f"User: {text}")
 
-規則：
-- 使用條列式
-- 每點不超過 2 行
-- 去除冗詞與重複敘述
-- 使用繁體中文
-
-內容：
-{text}
-"""
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    system_prompt_path = os.path.join(current_dir, "system_prompt.txt")
+    with open(system_prompt_path, "r", encoding="utf-8") as file:
+        system_prompt = file.read()
 
     response = ollama.chat(
         model="qwen3:8b",
         messages=[
-            {"role": "user", "content": prompt}
-        ]
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": text}
+        ],
+        stream=True
     )
 
-    return response["message"]["content"]
+    response_content = ""
+    print("Response: ", end='', flush=True)
+    for chunk in response:
+        content = chunk['message']['content']
+        print(content, end='', flush=True)
+        response_content += content
+
+    print()
+
+
+    return response_content

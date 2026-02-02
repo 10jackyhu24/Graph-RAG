@@ -43,3 +43,4 @@ frontend/next-env.d.ts
 frontend/package-lock.json
 __pycache__/
 .env
+backend/test/
