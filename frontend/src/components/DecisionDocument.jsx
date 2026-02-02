@@ -84,7 +84,7 @@ export default function DecisionDocument({ data }) {
                     >
                       {level}
                     </span>
-                    <h3 className="context-title">{ctx.title.zh}</h3>
+                    <h3 className="context-title">{ctx.title.zh || ctx.title.en}</h3>
                   </div>
                   <div className="context-confidence">
                     <span className="confidence-label">信心度</span>
@@ -94,7 +94,9 @@ export default function DecisionDocument({ data }) {
                   </div>
                 </div>
 
-                <p className="context-title-en">{ctx.title.en}</p>
+                {ctx.title.zh && ctx.title.en && (
+                  <p className="context-title-en">{ctx.title.en}</p>
+                )}
 
                 {/* 主要角色 */}
                 <div className="context-section-item">
@@ -107,30 +109,52 @@ export default function DecisionDocument({ data }) {
                 </div>
 
                 {/* 決策邊界 */}
-                <div className="context-section-item">
-                  <h4 className="item-label">決策邊界</h4>
-                  {ctx.decision_boundaries.map((boundary, idx) => (
-                    <div key={idx} className="boundary-item">
-                      <span className="boundary-type">{boundary.boundary_type}</span>
-                      <p className="boundary-desc">{boundary.description.zh}</p>
-                      <p className="boundary-desc-en">{boundary.description.en}</p>
-                    </div>
-                  ))}
-                </div>
+                {ctx.decision_boundaries && ctx.decision_boundaries.length > 0 && (
+                  <div className="context-section-item">
+                    <h4 className="item-label">決策邊界</h4>
+                    {ctx.decision_boundaries.map((boundary, idx) => (
+                      <div key={idx} className="boundary-item">
+                        <span className="boundary-type">{boundary.boundary_type}</span>
+                        <p className="boundary-desc">{boundary.description.zh || boundary.description.en}</p>
+                        {boundary.description.zh && boundary.description.en && (
+                          <p className="boundary-desc-en">{boundary.description.en}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
 
                 {/* 不適用情況 */}
                 <div className="context-section-item">
                   <h4 className="item-label">不適用情況</h4>
-                  <p className="note-text">{ctx.non_applicability_notes.zh}</p>
-                  <p className="note-text-en">{ctx.non_applicability_notes.en}</p>
+                  <p className="note-text">
+                    {ctx.non_applicability_notes.zh || ctx.non_applicability_notes.en}
+                  </p>
+                  {ctx.non_applicability_notes.zh && ctx.non_applicability_notes.en && (
+                    <p className="note-text-en">{ctx.non_applicability_notes.en}</p>
+                  )}
                 </div>
 
                 {/* 架構演化說明 */}
                 <div className="context-section-item">
                   <h4 className="item-label">架構演化說明</h4>
-                  <p className="note-text evolution">{ctx.architecture_evolution_note.zh}</p>
-                  <p className="note-text-en">{ctx.architecture_evolution_note.en}</p>
+                  <p className="note-text evolution">
+                    {ctx.architecture_evolution_note.zh || ctx.architecture_evolution_note.en}
+                  </p>
+                  {ctx.architecture_evolution_note.zh && ctx.architecture_evolution_note.en && (
+                    <p className="note-text-en">{ctx.architecture_evolution_note.en}</p>
+                  )}
                 </div>
+
+                {/* 來源參考 (如果有) */}
+                {ctx.source_reference && (
+                  <div className="context-section-item">
+                    <h4 className="item-label">來源參考</h4>
+                    <p className="note-text source-ref">
+                      頁碼: {ctx.source_reference.page}
+                    </p>
+                  </div>
+                )}
               </article>
             ))}
           </section>

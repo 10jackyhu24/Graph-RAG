@@ -22,7 +22,11 @@
                     "decision_level": {"enum": ["L", "M", "S"]},
                     "title": {
                         "type": "object",
-                        "properties": {"zh": {"type": "string"}, "en": {"type": "string"}}
+                        "properties": {
+                            "zh": {"type": "string"},
+                            "en": {"type": "string"}
+                        },
+                        "required": ["zh", "en"]
                     },
                     "context_intents": {"type": "array", "items": {"type": "string"}},
                     "primary_roles": {"type": "array", "items": {"type": "string"}},
@@ -33,26 +37,75 @@
                             "properties": {
                                 "name": {"type": "string"},
                                 "type": {"type": "string"},
-                                "description": {"type": "object", "properties": {"zh": {"type": "string"}, "en": {"type": "string"}}}
+                                "description": {
+                                    "type": "object",
+                                    "properties": {
+                                        "zh": {"type": "string"},
+                                        "en": {"type": "string"}
+                                    },
+                                    "required": ["zh", "en"]
+                                }
                             }
                         }
                     },
-                    "conditions": {"type": "object", "properties": {"zh": {"type": "array", "items": {"type": "string"}}, "en": {"type": "array", "items": {"type": "string"}}}},
-                    "observed_issues_or_risks": {"type": "object", "properties": {"zh": {"type": "array", "items": {"type": "string"}}, "en": {"type": "array", "items": {"type": "string"}}}},
-                    "outcomes_or_consequences": {"type": "object", "properties": {"zh": {"type": "array", "items": {"type": "string"}}, "en": {"type": "array", "items": {"type": "string"}}}},
+                    "conditions": {
+                        "type": "object",
+                        "properties": {
+                            "zh": {"type": "array", "items": {"type": "string"}},
+                            "en": {"type": "array", "items": {"type": "string"}}
+                        },
+                        "required": ["zh", "en"]
+                    },
+                    "observed_issues_or_risks": {
+                        "type": "object",
+                        "properties": {
+                            "zh": {"type": "array", "items": {"type": "string"}},
+                            "en": {"type": "array", "items": {"type": "string"}}
+                        },
+                        "required": ["zh", "en"]
+                    },
+                    "outcomes_or_consequences": {
+                        "type": "object",
+                        "properties": {
+                            "zh": {"type": "array", "items": {"type": "string"}},
+                            "en": {"type": "array", "items": {"type": "string"}}
+                        },
+                        "required": ["zh", "en"]
+                    },
                     "decision_boundaries": {
                         "type": "array",
                         "items": {
                             "type": "object",
                             "properties": {
                                 "boundary_type": {"type": "string"},
-                                "description": {"type": "object", "properties": {"zh": {"type": "string"}, "en": {"type": "string"}}},
+                                "description": {
+                                    "type": "object",
+                                    "properties": {
+                                        "zh": {"type": "string"},
+                                        "en": {"type": "string"}
+                                    },
+                                    "required": ["zh", "en"]
+                                },
                                 "affected_roles": {"type": "array", "items": {"type": "string"}}
                             }
                         }
                     },
-                    "non_applicability_notes": {"type": "object", "properties": {"zh": {"type": "string"}, "en": {"type": "string"}}},
-                    "architecture_evolution_note": {"type": "object", "properties": {"zh": {"type": "string"}, "en": {"type": "string"}}},
+                    "non_applicability_notes": {
+                        "type": "object",
+                        "properties": {
+                            "zh": {"type": "string"},
+                            "en": {"type": "string"}
+                        },
+                        "required": ["zh", "en"]
+                    },
+                    "architecture_evolution_note": {
+                        "type": "object",
+                        "properties": {
+                            "zh": {"type": "string"},
+                            "en": {"type": "string"}
+                        },
+                        "required": ["zh", "en"]
+                    },
                     "confidence_score": {"type": "number", "minimum": 0, "maximum": 1},
                     "source_reference": {"type": "object", "properties": {"section": {"type": "string"}, "page": {"type": "string"}}}
                 },

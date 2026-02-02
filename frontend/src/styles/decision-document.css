@@ -273,6 +273,13 @@
   background: #f4ecf7;
 }
 
+.note-text.source-ref {
+  border-left-color: #16a085;
+  background: #e8f8f5;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
 .note-text-en {
   background: white;
   padding: 0.8rem;
