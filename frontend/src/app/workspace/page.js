@@ -19,7 +19,7 @@ export default function WorkspacePage() {
     if (file) formData.append("file", file)
     if (text) formData.append("text", text)
 
-    const res = await fetch("http://localhost:8000/api/upload", {
+    const res = await fetch("http://localhost:8000/api/process", {
       method: "POST",
       body: formData,
     })
