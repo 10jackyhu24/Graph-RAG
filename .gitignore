@@ -44,3 +44,4 @@ frontend/package-lock.json
 __pycache__/
 .env
 backend/test/
+backend/app/data
