@@ -1,22 +1,40 @@
 function Steps() {
+  const items = [
+    {
+      title: "感知與結構化",
+      desc: "PDF/IFC 轉成保留表格與標題的 Markdown。",
+      meta: "Unstructured hi_res",
+    },
+    {
+      title: "語義萃取",
+      desc: "LLM 依據 Pydantic Schema 自動填寫 JSON。",
+      meta: "LangChain 1.0",
+    },
+    {
+      title: "三層儲存",
+      desc: "Postgres + Chroma + Neo4j 同步落地。",
+      meta: "Data Sovereignty",
+    },
+  ];
+
   return (
     <section className="steps">
-      <div className="step">
-        <h4>1. 上傳或貼上</h4>
-        <p>支援 PDF、DOCX、TXT 或文字。</p>
+      <div className="section-header">
+        <h2>GraphRAG Pipeline</h2>
+        <p>從非結構化資料到可推理的決策網路。</p>
       </div>
 
-      <div className="step">
-        <h4>2. 生成決策頁</h4>
-        <p>即時顯示解析、結構化與渲染進度。</p>
-      </div>
-
-      <div className="step">
-        <h4>3. 審閱與下載</h4>
-        <p>可編輯，保存並下載 HTML / PDF。</p>
+      <div className="step-grid">
+        {items.map((item) => (
+          <article key={item.title} className="step-card">
+            <div className="step-meta">{item.meta}</div>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </article>
+        ))}
       </div>
     </section>
-  )
+  );
 }
 
-export default Steps
+export default Steps;

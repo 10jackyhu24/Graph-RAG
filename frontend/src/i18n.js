@@ -8,19 +8,19 @@ const resources = {
     translation: {
       home: "Home",
       workspace: "Workspace",
-      meetingMode: "Meeting Mode",
+      meetingMode: "Meeting",
       decisionDialog: "Decision Dialog",
-      lightMode: "Light Mode",
+      lightMode: "Light",
       login: "Login",
     },
   },
   zh: {
     translation: {
       home: "首頁",
-      workspace: "工作區",
+      workspace: "工作台",
       meetingMode: "會議模式",
       decisionDialog: "決策對話",
-      lightMode: "淺色",
+      lightMode: "亮色",
       login: "登入",
     },
   },
@@ -28,7 +28,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: "en", // 預設語言
+  lng: "zh",
   fallbackLng: "en",
   interpolation: {
     escapeValue: false,

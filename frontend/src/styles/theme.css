@@ -1,29 +1,18 @@
 :root {
-  --bg-main: linear-gradient(180deg, #f6f8fb, #eef1f6);
-  --bg-card: #ffffff;
-
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
-
-  --border-light: #e5e7eb;
-
-  --primary: #3b82f6;
-  --primary-soft: #e0edff;
-
-  --shadow-card: 0 10px 25px rgba(0,0,0,0.06);
-}
-
-[data-theme="dark"] {
-  --bg-main: #0f172a;
-  --bg-card: #020617;
-
-  --text-primary: #e5e7eb;
-  --text-secondary: #94a3b8;
-
-  --border-light: #1e293b;
-
-  --primary: #60a5fa;
-  --primary-soft: rgba(96,165,250,0.15);
-
-  --shadow-card: 0 10px 30px rgba(0,0,0,0.5);
+  --bg: #f4efe4;
+  --bg-2: #fff7ea;
+  --ink: #151514;
+  --muted: #5b5b5b;
+  --accent: #ff6b4a;
+  --accent-2: #2f6fff;
+  --accent-3: #21b59f;
+  --card: #ffffff;
+  --stroke: #e7dccb;
+  --shadow: 0 20px 60px rgba(24, 24, 24, 0.12);
+  --radius: 18px;
+  --page-width: 1600px;
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-zh: var(--font-zh);
 }

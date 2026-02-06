@@ -1,41 +1,7 @@
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-  background: linear-gradient(120deg, #f2f4ff, #eef7f6);
+.home .hero {
+  min-height: 380px;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 16px 32px;
-}
-
-.hero-section {
-  display: flex;
-  gap: 40px;
-  padding: 80px;
-}
-
-.hero {
-  max-width: 520px;
-}
-
-.preview-card {
-  background: white;
-  border-radius: 12px;
-  padding: 24px;
-  width: 360px;
-}
-
-.steps {
-  display: flex;
-  gap: 24px;
-  padding: 40px 80px;
-}
-
-.step {
-  background: white;
-  padding: 24px;
-  border-radius: 12px;
-  flex: 1;
+.home .preview-card {
+  align-self: stretch;
 }

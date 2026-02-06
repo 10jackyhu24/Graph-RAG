@@ -4,51 +4,80 @@
   padding: 0;
 }
 
-html, body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-               "Noto Sans TC", sans-serif;
-  background: var(--bg-main);
-  color: var(--text-primary);
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-body), var(--font-zh), sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top left, #fff3e2 0%, #f4efe4 40%, #f0ece6 100%);
+  background-attachment: fixed;
+  letter-spacing: 0.2px;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255, 107, 74, 0.18), transparent 35%),
+    radial-gradient(circle at 85% 20%, rgba(47, 111, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 50% 85%, rgba(33, 181, 159, 0.15), transparent 45%);
+  z-index: -1;
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
-button {
-  padding: 8px 16px;
-  border: 3px solid #b5b5b5;
-  border-radius: 5px;
-  cursor: pointer;
-  background: #e3e3e3;
+img {
+  max-width: 100%;
+  display: block;
 }
 
-.title-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  border-bottom: 1px solid var(--border-light);
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display), var(--font-zh), sans-serif;
+  font-weight: 600;
 }
 
-.work-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
-.word-body {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 24px;
+main {
+  width: min(100%, var(--page-width));
+  margin: 0 auto;
+  padding: 32px 24px 80px;
 }
 
-.input-panel, .file-panel {
-  width: 20%;
+@keyframes floatIn {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-.preview-panel {
-  width: 55%;
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 107, 74, 0.3);
+  }
+  50% {
+    box-shadow: 0 18px 40px rgba(255, 107, 74, 0.25);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(255, 107, 74, 0.3);
+  }
 }

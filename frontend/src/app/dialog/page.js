@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
 export default function DialogPage() {
   return (
     <main className="simple-page">
       <h1>決策對話</h1>
-      <p>針對決策內容與 AI 進行追問與風險分析。</p>
+      <p>後續將支援以圖譜 + RAG 生成影子決策模擬。</p>
 
       <div className="chat-box">
-        <div className="message ai">你想釐清哪一個決策？</div>
+        <div className="message ai">請輸入你的問題，例如：為什麼這根鋼樑的安裝方式不同？</div>
       </div>
 
-      <input placeholder="輸入你的問題…" />
+      <input placeholder="輸入問題..." />
     </main>
-  )
+  );
 }

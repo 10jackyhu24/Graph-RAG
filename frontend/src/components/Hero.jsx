@@ -1,25 +1,27 @@
+import Link from "next/link";
+
 function Hero() {
   return (
     <section className="hero">
-      <p className="hero-tag">DECISION TRANSLATOR</p>
+      <div className="hero-tag">INDUSTRIAL KNOWLEDGE GRAPH</div>
 
       <h1>
-        把混亂文件轉成可以直接審閱的
+        將大師經驗
         <br />
-        決策頁面。
+        變成可推理的決策圖譜
       </h1>
 
       <p className="hero-desc">
-        一條清楚流程，讓團隊看見不可逆的關鍵決策。
-        沒有冗長設定，只有可下載的決策頁面。
+        以 GraphRAG 抽取 PDF / IFC / 會議紀錄中的因果與脈絡，
+        全程在地端推理與向量化，確保資料主權與機密安全。
       </p>
 
       <div className="hero-buttons">
-        <button className="primary">進入工作區</button>
-        <button>登入</button>
+        <Link className="btn primary" href="/workspace">開始建模</Link>
+        <Link className="btn ghost" href="/workspace">開啟工作台</Link>
       </div>
     </section>
-  )
+  );
 }
 
-export default Hero
+export default Hero;
