@@ -46,3 +46,7 @@ __pycache__/
 backend/test/
 backend/app/data
 backend/.venv
+
+backend/__pycache__/
+backend/venv/
+backend/.env
