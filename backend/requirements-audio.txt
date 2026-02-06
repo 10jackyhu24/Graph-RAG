@@ -1,0 +1,4 @@
+pyannote-audio
+openai-whisper
+pydub==0.25.1
+transformers<5

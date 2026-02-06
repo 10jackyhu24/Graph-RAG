@@ -1,11 +1,27 @@
-ollama==0.6.1
-fastapi==0.128.0
+# NOTE: ollama has no PyPI wheel for Python 3.12. Install it on Python 3.11
+# or add separately when using Ollama.
+fastapi>=0.110,<1.0
 PyPDF2==3.0.1
 python-docx==1.2.0
 python-multipart==0.0.22
-uvicorn==0.40.0
+uvicorn>=0.27,<1.0
 reportlab==4.4.9
-pyannote-audio==4.0.3
+langchain>=0.3,<0.5
+langchain-community>=0.3,<0.5
+langchain-chroma>=0.1,<0.3
+langchain-huggingface>=0.0.3,<1.0
+langchain-openai>=0.3,<0.5
+langchain-ollama>=0.3,<0.5
+unstructured==0.17.2
+unstructured-inference>=0.8.6,<0.9
+markdownify==0.12.1
+pi-heif==0.15.0
+unstructured-pytesseract==0.3.12
+ifcopenshell==0.8.4.post1
+neo4j==5.28.1
+psycopg==3.2.10
+chromadb==0.6.3
+sentence-transformers==3.0.1
+jsonschema==4.23.0
 openai-whisper==20250625
-pydub==0.25.1
-transformers==5.0.0
+faster-whisper>=1.0,<2.0
