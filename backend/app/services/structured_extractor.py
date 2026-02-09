@@ -11,6 +11,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.extraction import EngineeringLogic
 from app.services.llm_router import get_llm
 
+from app.utils.logger import LogHandle
+
 SYSTEM_PROMPT = """
 You are an expert knowledge extraction agent for construction and manufacturing.
 Given layout-aware markdown or structured text, extract the decision logic and
@@ -38,7 +40,9 @@ async def extract_engineering_logic(
     provider: Optional[str] = None,
     model: Optional[str] = None,
 ) -> EngineeringLogic:
+    logger = LogHandle("extract_engineering_logic", "extract_engineering_logic")
     llm = get_llm(provider=provider, model=model, temperature=0)
+    logger.write_log(f"Extracting engineering logic with provider: {provider}, model: {model}")
     prompt = build_prompt()
 
     resolved_provider = (provider or "").lower()
@@ -71,7 +75,9 @@ async def extract_with_agent(
     provider: Optional[str] = None,
     model: Optional[str] = None,
 ) -> dict:
+    logger = LogHandle("extract_with_agent", "extract_with_agent")
     llm = get_llm(provider=provider, model=model, temperature=0)
+    logger.write_log(f"Extracting with agent with provider: {provider}, model: {model}")
     schema = agent.get("schema_json") or {}
     agent_prompt = agent.get("prompt") or ""
     output_language = _normalize_language(agent.get("output_language") or "zh")

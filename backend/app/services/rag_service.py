@@ -10,6 +10,8 @@ from app.services.llm_router import get_llm
 from app.services.postgres_service import get_connection, ensure_schema, list_documents
 from app.services.neo4j_service import _tenant_label, get_driver
 
+from app.utils.logger import LogHandle
+
 
 RAG_SYSTEM = """
 You are a helpful industrial knowledge assistant. Use the provided context from
@@ -98,7 +100,9 @@ async def stream_rag_answer(
     provider: Optional[str],
     model: Optional[str],
 ):
+    logger = LogHandle("stream_rag_answer", "stream_rag_answer")
     llm = get_llm(provider=provider, model=model, temperature=0)
+    logger.write_log(f"Received question: {question} with language: {language}, provider: {provider}, model: {model}")
     context = build_context(tenant_id, question)
     prompt = build_rag_prompt()
     chain = prompt | llm

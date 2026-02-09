@@ -46,3 +46,4 @@ backend/test/
 backend/app/data
 venv/
 backend/.env
+logs/

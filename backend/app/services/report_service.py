@@ -11,6 +11,8 @@ from langchain_core.messages import HumanMessage, SystemMessage
 
 from app.services.llm_router import get_llm
 
+from app.utils.logger import LogHandle
+
 
 DEFAULT_FIELDS = {
     "document_metadata",
@@ -207,7 +209,9 @@ def build_pdf_report(payload: dict, language: str = "zh") -> bytes:
 
 async def generate_note(payload: dict, language: str, provider: str | None, model: str | None) -> str:
     language = _normalize_language(language)
+    logger = LogHandle("generate_note", "generate_note")
     llm = get_llm(provider, model, temperature=0.4)
+    logger.write_log(f"Generating note for payload with language: {language}, provider: {provider}, model: {model}")
     system_text = (
         "你是一個可愛又專業的技術助理，請用繁體中文整理成短筆記。"
         if _is_chinese(language)

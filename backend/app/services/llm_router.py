@@ -19,6 +19,7 @@ def get_llm(provider: Optional[str] = None, model: Optional[str] = None, tempera
         )
 
     if resolved_provider == "deepseek":
+        print(f"DEEPSEEK_API_KEY: {settings.deepseek_api_key}")
         if not settings.deepseek_api_key:
             raise ValueError("DEEPSEEK_API_KEY is required for deepseek provider")
         return ChatOpenAI(

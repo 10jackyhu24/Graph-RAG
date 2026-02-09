@@ -1,36 +1,43 @@
-services:
-  # 後端 API 服務
-  backend:
-    build: .  # 指向包含 Dockerfile 的資料夾
-    container_name: graph-rag-backend
-    restart: unless-stopped
-    ports:
-      - "8306:8306"
-    environment:
-      # 注意：連線主機名要改為 postgres (Docker 內部網路名稱)
-      - DATABASE_URL=postgresql://decision_pages_user:decision_pages_pass@postgres:5432/decision_pages
-    depends_on:
-      postgres:
-        condition: service_healthy
+version: "3.9"
 
-  # 原有的 Postgres 服務
+services:
   postgres:
-    image: postgres:15
-    container_name: decision-pages-postgres
-    restart: unless-stopped
-    ports:
-      - "5433:5432"
+    image: postgres:16
+    container_name: graph_postgres
     environment:
-      POSTGRES_DB: decision_pages
-      POSTGRES_USER: decision_pages_user
-      POSTGRES_PASSWORD: decision_pages_pass
+      POSTGRES_USER: graph
+      POSTGRES_PASSWORD: graph
+      POSTGRES_DB: graph
+    ports:
+      - "5435:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U decision_pages_user -d decision_pages"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+
+  neo4j:
+    image: neo4j:5.26
+    container_name: graph_neo4j
+    environment:
+      NEO4J_AUTH: neo4j/neo4jpassword
+      NEO4J_server_memory_pagecache_size: 1G
+      NEO4J_server_memory_heap_initial__size: 1G
+      NEO4J_server_memory_heap_max__size: 2G
+    ports:
+      - "7475:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+
+  chroma:
+    image: chromadb/chroma:0.6.3
+    container_name: graph_chroma
+    environment:
+      ALLOW_RESET: "true"
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
 
 volumes:
   postgres_data:
+  neo4j_data:
+  chroma_data:

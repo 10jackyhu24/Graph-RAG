@@ -8,6 +8,8 @@ from langchain_core.prompts import ChatPromptTemplate
 
 from app.services.llm_router import get_llm
 
+from app.utils.logger import LogHandle
+
 
 SCHEMA_SYSTEM = """
 You are a data architect for construction/manufacturing documents.
@@ -33,7 +35,9 @@ def build_schema_prompt(requirement: str, language: str) -> ChatPromptTemplate:
 
 
 async def generate_schema(requirement: str, language: str, provider: Optional[str], model: Optional[str]) -> dict:
+    logger = LogHandle('generate_schema', 'generate_schema')
     llm = get_llm(provider=provider, model=model, temperature=0)
+    logger.write_log(f"Generating schema for requirement: {requirement} with language: {language} using provider: {provider} and model: {model}")
     prompt = build_schema_prompt(requirement, language)
     result = await (prompt | llm).ainvoke({"requirement": requirement, "language": language})
     content = result.content if hasattr(result, "content") else str(result)
